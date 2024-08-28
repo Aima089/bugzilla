@@ -1,0 +1,10 @@
+<h1> bugs </h1>
+<ul>
+<% @bugs.each do |bug| %>
+    <li>
+  
+     <%= link_to bug.title, dashboard_path %>
+
+</li>
+<% end %>
+</ul>

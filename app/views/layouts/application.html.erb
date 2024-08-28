@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MyApp</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <!-- Include the import map -->
+  <%= javascript_importmap_tags %>
+
+  <!-- Include other stylesheets or scripts -->
+  <%= stylesheet_link_tag "application", "data-turbolinks-track": "reload" %>
+</head>
+<body>
+  <%= yield %>
+
+  <!-- Include your main application JavaScript file -->
+  <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+</body>
+</html>

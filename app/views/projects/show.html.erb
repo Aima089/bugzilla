@@ -1,0 +1,29 @@
+<h1>Project Details</h1>
+
+<p>
+  <strong>title:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>deadline:</strong>
+  <%= @project.description %>
+</p>
+<%= link_to "Back to projects", projects_path, class: "btn btn-primary" %>
+<%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-primary" %>
+<%= link_to "Add Bug", new_project_bug_path(@project), class: "btn btn-primary" %>
+<%= link_to "Delete Account", project_path(@project), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+
+ 
+<h2>Bugs</h2>
+<% if @project.bugs.present? %>
+  <ul>
+    <% @project.bugs.each do |bug| %>
+      <li>
+        <%= link_to bug.title, project_bug_path(@project, bug) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No bugs available</p>
+<% end %>

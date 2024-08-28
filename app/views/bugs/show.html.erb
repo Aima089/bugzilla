@@ -1,0 +1,12 @@
+<h1>Project Details</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bug.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @bug.description %>
+</p>
+<%= link_to "back to project", project_path(@bug.project) %>

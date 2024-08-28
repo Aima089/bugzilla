@@ -1,0 +1,21 @@
+<h1> Project list </h1>
+<% if policy(Project).create? %>
+<%= link_to "Add Project", new_project_path, class: "btn btn-primary" %>
+<% end %>
+<%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @projects.each do |project| %>
+    <li>
+      <%= link_to project.name, project_path(project) %>
+      <%= link_to "Edit", edit_project_path(project), class: "btn btn-secondary" %>
+      <%= link_to "Delete", project_path(project), data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      } %>
+    </li>
+  <% end %>
+</ul>
+<ul>
+
+</ul>
