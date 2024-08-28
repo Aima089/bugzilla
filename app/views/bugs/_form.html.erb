@@ -18,7 +18,7 @@
 
     <div class="field">
       <%= form.label :bug_type %>
-      <%= form.select :bug_type, options_for_select(Bug.bug_types.keys.map { |type| [type.humanize, type] }, @bug.bug_type), {}, { id: 'bug_type_select', data: { target: "bug-form.bugType" } } %>
+      <%= form.select :bug_type, options_for_select(Bug.bug_types.keys.map { |type| [type.humanize, type] }, @bug.bug_type), {}, { id: 'bug_type_select', data: { target: "bug-form.bugType" }, data: { action: "change->bug-form#updateStatusOptions" } } %>
     </div>
 
     <div class="field">

@@ -1,8 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  connect() {
+    console.log("Status Controller connected!")
+  }
+  
   static targets = ["bugType", "status"]
-
+  
   initialize() {
     this.statusOptions = {
       feature: [
