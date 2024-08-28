@@ -1,40 +1,18 @@
-import { Controller } from "@hotwired/stimulus"
 
-export default class extends Controller {
-  connect() {
-    console.log("Status Controller connected!")
-  }
-  
-  static targets = ["bugType", "status"]
-  
-  initialize() {
-    this.statusOptions = {
-      feature: [
-        { value: 'firstpoint', text: 'First Point' },
-        { value: 'started', text: 'Started' },
-        { value: 'resolved', text: 'Resolved' }
-      ],
-      bug: [
-        { value: 'completed', text: 'Completed' },
-        { value: 'started', text: 'Started' },
-        { value: 'resolved', text: 'Resolved' }
-      ]
+document.addEventListener('DOMContentLoaded', function() {
+  var statusSelect = document.getElementById('status_select');
+  var typeSelect = document.getElementById('type_select');
+  typeSelect.addEventListener('change', function() {
+    var selectedType = typeSelect.value;
+    if (selectedType === 'Feature') {
+      statusField.style.display = 'block';
+      statusSelect.innerHTML = '<option value="New">New</option><option value="Started">Started</option><option value="Completed">Completed</option>';
+    } else if (selectedType === 'Bug') {
+      statusField.style.display = 'block';
+      statusSelect.innerHTML = '<option value="New">New</option><option value="Started">Started</option><option value="Resolved">Resolved</option>';
+    } else {
+      statusField.style.display = 'none';
+      statusSelect.innerHTML = '';
     }
-    this.updateStatusOptions()
-  }
-
-  updateStatusOptions() {
-    const selectedBugType = this.bugTypeTarget.value
-    const statusSelect = this.statusTarget
-
-    statusSelect.innerHTML = '' // Clear existing options
-    const options = this.statusOptions[selectedBugType] || []
-
-    options.forEach(option => {
-      const newOption = document.createElement("option")
-      newOption.value = option.value
-      newOption.text = option.text
-      statusSelect.add(newOption)
-    })
-  }
-}
+  });
+});

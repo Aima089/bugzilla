@@ -1,4 +1,5 @@
 <%= form_with(model: [@project, @bug], local: true) do |form| %>
+  
   <% if @bug.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
@@ -10,34 +11,36 @@
     </div>
   <% end %>
 
-  <div data-controller="bug-form">
-    <div class="field">
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-    </div>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
 
-    <div class="field">
-      <%= form.label :bug_type %>
-      <%= form.select :bug_type, options_for_select(Bug.bug_types.keys.map { |type| [type.humanize, type] }, @bug.bug_type), {}, { id: 'bug_type_select', data: { target: "bug-form.bugType" }, data: { action: "change->bug-form#updateStatusOptions" } } %>
-    </div>
+  <div class="field">
+    <%= form.label :bug_type %>
+    <%= form.select :bug_type, options_for_select(Bug.bug_types.keys.map { |type| [type.humanize, type] }, @bug.bug_type), { id: 'type_select' } %>
+  </div>
 
-    <div class="field">
-      <%= form.label :status %>
-      <%= form.select :status, [], {}, { id: 'status_select', data: { target: "bug-form.status" } } %>
-    </div>
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, options_for_select([], ''), { id: 'status_select' } %>
+  </div>
 
-    <div class="field">
-      <%= form.label :description %>
-      <%= form.text_area :description %>
-    </div>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
 
-    <div class="field">
-      <%= form.label :deadline %>
-      <%= form.date_select :deadline %>
-    </div>
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_select :deadline %>
+  </div>
+  <div class="field">
+    <%= form.label :image, "Upload Image" %>
+    <%= form.file_field :image %>
+  </div>
 
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+  <div class="actions">
+    <%= form.submit %>
   </div>
 <% end %>
