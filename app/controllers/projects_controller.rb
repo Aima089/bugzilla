@@ -5,7 +5,12 @@ class ProjectsController < ApplicationController
       @projects = policy_scope(Project) # Ensure the user sees the correct scope of projects
       @project = Project.all
     end
-  
+    
+    def search
+      @projects = Project.where("name LIKE ?", "%#{params[:key]}%")
+      render :index
+    end
+
     def new
       @project = Project.new
     end
@@ -20,6 +25,7 @@ class ProjectsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     end
+    
   
     def show
       # @project is already set by before_action
@@ -58,5 +64,5 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :description)
     end
-  end
-  
+   
+    end

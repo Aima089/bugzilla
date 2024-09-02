@@ -4,6 +4,12 @@
 <% end %>
 <%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-primary" %>
 
+<%= form_with url: search_projects_path, method: :get, local: true do %>
+  <%= text_field_tag :key, params[:key], placeholder: "Search Projects" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+
 <ul>
   <% @projects.each do |project| %>
     <li>
