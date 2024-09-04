@@ -7,6 +7,12 @@ class Users::SessionsController < Devise::SessionsController
   def new
     super
   end
+  def after_sign_in_path_for(resource)
+    dashboard_path # or wherever you want to redirect
+  end
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path # or any other path you want to redirect to after sign-out
+  end
 
   # POST /resource/sign_in
   def create

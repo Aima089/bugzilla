@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
+ 
   }
+  devise_scope :user do
+    root to: 'devise/sessions#new'
+  end
+     get 'dashboard', to: 'dashboard#index'
 
-  get 'dashboard', to: 'dashboard#index'
+  
 
   resources :projects do
     # Define search route for projects

@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MyApp</title>
+  <title>BugProject</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <!-- Include the import map -->
-  <%= javascript_importmap_tags %>
-
-  <!-- Include other stylesheets or scripts -->
-  <%= stylesheet_link_tag "application", "data-turbolinks-track": "reload" %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
 </head>
 <body>
-  <%= yield %>
+  <header>
+    <% if user_signed_in? %>
 
-  <!-- Include your main application JavaScript file -->
-  <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path %>
+      <%= link_to 'Sign up', new_user_registration_path %>
+    <% end %>
+  </header>
+
+  <main>
+    <%= yield %>
+  </main>
 </body>
 </html>
