@@ -19,7 +19,7 @@
 <h2>Bugs</h2>
 <% if @project.bugs.present? %>
   <ul>
-    <% @bugs.each do |bug| %>
+    <% @bugs&.each do |bug| %>
       <li>
         <%= link_to bug.title, project_bug_path(@project, bug) %>
       </li>

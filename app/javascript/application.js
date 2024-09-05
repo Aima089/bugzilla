@@ -1,9 +1,3 @@
-import { Application } from "@hotwired/stimulus"
-import Rails from "@rails/ujs";
-
-// Start Stimulus application
-const application = Application.start()
-export { application }
-
-// Start Rails UJS
-Rails.start()
+// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+import "@hotwired/turbo-rails"
+import "controllers"
