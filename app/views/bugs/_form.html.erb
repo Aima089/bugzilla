@@ -15,14 +15,16 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
-  <div class="field">
-  <%= form.label :bug_type %>
-  <%= form.select :bug_type, options_for_select(['Feature', 'Bug']), {include_blank: true}, { id: 'type_select' } %>
-</div>
+  <div data-controller="bugForm">
+    <div class="field">
+    <%= form.label :bug_type %>
+      <%= form.select :bug_type, options_for_select(['Feature', 'Bug']), {include_blank: true}, { id: 'type_select' } %>
+    </div>
 
-<div class="field" id="status_field">
-  <%= form.label :status %>
-  <%= form.select :status, options_for_select([]), { id: 'status_select' } %>
+  <div class="field" id="status_field">
+    <%= form.label :status %>
+    <%= form.select :status, options_for_select([]), { id: 'status_select' } %>
+  </div>
 </div>
 
   <div class="field">
@@ -44,45 +46,3 @@
   </div>
 <% end %>
 
-<script type="module">
-  import handleBugForm from './controllers/bug_form_controller.js';
-
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log("JavaScript is loaded");
-    
-    var statusSelect = document.getElementById('status_select');
-    var typeSelect = document.getElementById('type_select');
-    var statusField = document.getElementById('status_field');
-    
-    if (typeSelect && statusSelect && statusField) {
-      console.log('Fields are available.');
-      
-      function updateStatusOptions() {
-        var selectedType = typeSelect.value;
-        if (selectedType === 'Feature') {
-          statusField.style.display = 'block';
-          statusSelect.innerHTML = `
-            <option value="New">New</option>
-            <option value="Started">Started</option>
-            <option value="Completed">Completed</option>`;
-        } else if (selectedType === 'Bug') {
-          statusField.style.display = 'block';
-          statusSelect.innerHTML = `
-            <option value="New">New</option>
-            <option value="Started">Started</option>
-            <option value="Resolved">Resolved</option>`;
-        } else {
-          statusField.style.display = 'none';
-          statusSelect.innerHTML = '';
-        }
-      }
-
-      updateStatusOptions();
-      typeSelect.addEventListener('change', updateStatusOptions);
-    } else {
-      console.error("One or more form elements not found.");
-    }
-  });
-
-  handleBugForm();  // This will log "Handling bug form"
-</script>
